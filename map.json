@@ -1,0 +1,37 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "World Suicide Cases (2000-2016)",
+    "width": 800,
+    "height": 400,
+    "projection": {"type": "equalEarth"},
+    "data": {
+    "url": "https://raw.githubusercontent.com/kongpuifun/3179/main/ne_110m.json",
+    "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+    },
+    "transform": [
+    {
+    "lookup": "properties.NAME",
+    "from": {
+    "data": {
+    "url": "https://raw.githubusercontent.com/kongpuifun/3179/main/master.csv"
+    },
+    "key": "country",
+    "fields": ["suicides_no"]
+}
+},
+{"calculate": "datum.suicides_no + 0.1", "as": "Suicide Cases"}
+],
+"mark": {"type": "geoshape"},
+"encoding": {
+"color": {
+"field": "Suicide Cases",
+"type": "quantitative",
+"scale": {"type": "log"}
+},
+"tooltip": [
+{"field": "properties.NAME", "type": "nominal", "title":
+"country"},
+{"field": "suicides_no", "type": "quantitative"}
+]
+}
+}
