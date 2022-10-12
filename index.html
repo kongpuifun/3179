@@ -20,12 +20,12 @@
 <div id="scatter_plot"></div>
 
 <script type="text/javascript">
-  var spec1 = "json";
+  var spec1 = "map.json";
   vegaEmbed('#choropleth_map', spec1).then(function(result) {
     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
   }).catch(console.error);
 
-  var spec2 = "json_10";
+  var spec2 = "scatter_plot.json";
   vegaEmbed('#scatter_plot', spec2).then(function(result) {
     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
   }).catch(console.error);
