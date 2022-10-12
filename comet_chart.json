@@ -8,7 +8,7 @@
       {"pivot": "year", "value": "population", "groupby": ["age", "sex"]},
       {"fold": ["2005", "2015"], "as": ["year", "population"]},
       {"calculate": "toNumber(datum.year)", "as": "year"},
-      {"calculate": "datum['2015'] - datum['2005']", "as": "suicides/100k pop"}
+      {"calculate": "datum['2015'] + datum['2005']", "as": "suicides/100k pop"}
     ],
     "mark": "trail",
     "encoding": {
