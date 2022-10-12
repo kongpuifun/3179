@@ -1,0 +1,35 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 200,
+    "height": 400,
+    "data": {"url": "https://raw.githubusercontent.com/kongpuifun/3179/main/master.csv"},
+    "title": "Difference on Suicide Rate between Gender in year 2005 and 2015",
+    "transform": [
+      {"pivot": "year", "value": "population", "groupby": ["age", "sex"]},
+      {"fold": ["2005", "2015"], "as": ["year", "population"]},
+      {"calculate": "toNumber(datum.year)", "as": "year"},
+      {"calculate": "datum['2015'] - datum['2005']", "as": "suicides/100k pop"}
+    ],
+    "mark": "trail",
+    "encoding": {
+      "x": {"field": "year", "title": "year"},
+      "y": {"field": "age", "title": "Age","sort":["5-14 years"]},
+      "size": {
+        "field": "population",
+        "type": "quantitative",
+        "scale": {"range": [5, 40]},
+        "legend": {"values": [1000000, 43805214]},
+        "title": "Population"
+      },
+      "tooltip": [{"field": "year", "type": "quantitative"}, {"field": "population"}],
+      "color": {
+        "field": "suicides/100k pop",
+        "type": "quantitative",
+        "scale": {"domainMid": 0},
+        "title": "Suicide Rate"
+      },
+      "column": {"field": "sex", "title": "Sex"}
+    },
+    "view": {"stroke": null},
+    "config": {"legend": {"orient": "bottom", "direction": "horizontal"}}
+  }

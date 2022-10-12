@@ -1,0 +1,43 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 650,
+    "height": 450,
+    "data": {
+        "url": "https://raw.githubusercontent.com/kongpuifun/3179/main/master.csv"
+    },
+    "title": "Top 10 Countries with Highest Suicides per year",
+    "config": {
+        "view": {
+            "strokeWidth": 0,
+            "step": 13
+        },
+        "axis": {
+            "domain": false
+        }
+    },
+    "transform": [
+          {"filter": 
+              {"field": "country", "oneOf": ["United States","Poland", "Russian Federation", "Japan", "France", "Brazil", "Republic of Korea", "Ukraine", "Germany","United Kingdom"]}}
+    ],
+    "mark": "rect",
+    "encoding": {
+        "x": {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+        },
+        "y": {
+            "field": "country",
+            "title": "Country"
+        },
+        "color": {
+            "field": "suicides_no",
+            "aggregate": "max",
+            "type": "quantitative",
+            "legend": {
+                "title": "Suicide Cases",
+                "values": [0, 15000]
+            }
+        }
+    }
+  }
