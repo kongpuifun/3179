@@ -1,8 +1,8 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "title": "Overall Suicide Trend",
-    "width": 600,
-    "height": 450,
+    "width": "container",
+    "height": "container",
     "data": { "url": "https://raw.githubusercontent.com/kongpuifun/3179/main/master.csv" },
     "config": {"view": {"stroke": null}},
     "params": [

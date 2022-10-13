@@ -1,7 +1,7 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "width": 200,
-    "height": 400,
+    "height": "container",
     "data": {"url": "https://raw.githubusercontent.com/kongpuifun/3179/main/master.csv"},
     "title": "Difference on Suicide Rate between Gender in year 2005 and 2015",
     "transform": [
