@@ -1,0 +1,48 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "World Total Population by Gender",
+    "width": "container", 
+    "height": "container",
+    "data": { "url": "https://raw.githubusercontent.com/kongpuifun/3179/main/master.csv"},
+    "transform": [
+      {"filter": "datum.year == 2005"},
+      {"calculate": "datum.sex == 2 ? 'Female' : 'Male'", "as": "gender"}
+    ],
+    "encoding": {
+      "y": {"field": "age","sort":["5-14 years"]}
+    },
+    "config":{
+        "background": "rgb(250, 245, 229)"
+    },
+    "layer": [{
+      "mark": "bar",
+      "encoding": {
+        "x": {
+          "aggregate": "sum", "field": "population",
+          "title": "Total Population",
+          "stack":  "normalize"
+        },
+        "color": {
+          "field": "sex",
+          "scale": {"range": ["#675193", "#ca8861"]}
+        }
+      }
+    }, {
+      "mark": {"type": "text", "opacity": 0.9, "color": "white"},
+      "encoding": {
+        "x": {
+          "aggregate": "sum", "field": "population",
+          "title": "Total Population",
+          "stack":  "normalize",
+          "bandPosition": 0.5
+        },
+        "text": {
+          "aggregate": "sum", "field": "population",
+          "title": "Total Population"
+        },
+        "detail": {
+          "field": "sex"
+        }
+      }
+    }]
+  }

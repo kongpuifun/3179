@@ -1,0 +1,54 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title":"Trend of Top 5 Country with Highest Suicide Case",
+    "width": "container",
+    "height": "container",
+    "data": { "url": "https://raw.githubusercontent.com/kongpuifun/3179/main/master.csv" },
+    "config": {"view": {"stroke": null}, "background":"rgb(250, 245, 229)"},
+    "params": [
+      {
+      "name": "Country_selection",
+      "value": "United States of America",
+      "bind": {
+        "input": "select",
+        "options": [
+          "United States of America",
+          "Russia",
+          "Japan",
+          "Republic of Korea",
+          "Ukraine"
+        ],
+        "labels": [
+          "United States of America",
+          "Russia",
+          "Japan",
+          "Republic of Korea",
+          "Ukraine"
+        ],
+        "name": "Country Selection: "
+      }
+      }
+    ],
+    "transform": [
+  {
+        "aggregate": [{
+         "op": "sum",
+         "field": "suicides_no",
+         "as": "Total_Suicide_Cases"
+        }],
+        "groupby": ["country","year","age"]
+      },
+      {"filter": "datum.country == Country_selection"}
+    ],
+    "mark": {
+      "type":"bar",
+    "point": true
+    },
+    "encoding": {
+      "x": {"field": "year", "title": "Year"},
+      "y": { "field": "Total_Suicide_Cases", "type": "quantitative", "title": "Suicide Case", "axis": {"grid": false, "ticks": false}},
+      "color": {"field": "age", "type": "nominal",
+      "sort": ["5-14 years","15-24 years","25-34 years","35-54 years","55-74 years"]},
+      "tooltip": [{"field": "year", "type": "quantitative"}, {"field": "Total_Suicide_Cases"}]
+    }
+  }

@@ -1,7 +1,7 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": 200,
-    "height": 400,
+    "width": 250,
+    "height": "container",
     "data": {"url": "https://raw.githubusercontent.com/kongpuifun/3179/main/master.csv"},
     "title": "Difference on Suicide Rate between Gender in year 2005 and 2015",
     "transform": [
@@ -31,5 +31,5 @@
       "column": {"field": "sex", "title": "Sex"}
     },
     "view": {"stroke": null},
-    "config": {"legend": {"orient": "bottom", "direction": "horizontal"}}
+    "config": {"legend": {"orient": "bottom", "direction": "horizontal"}, "background": "rgb(250, 245, 229)"}
   }

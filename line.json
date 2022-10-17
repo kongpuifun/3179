@@ -1,56 +1,28 @@
 {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "title": "Overall Suicide Trend",
-    "width": 600,
-    "height": 450,
-    "data": { "url": "https://raw.githubusercontent.com/kongpuifun/3179/main/master.csv" },
-    "config": {"view": {"stroke": null}},
-    "params": [
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title":"Overall Suicide Case",
+  "width": "container",
+  "height": "container",
+  "data": { "url": "https://raw.githubusercontent.com/kongpuifun/3179/main/master.csv" },
+  "config": {"view": {"stroke": null}, "background":"rgb(250, 245, 229)"},
+  "transform": [
     {
-      "name": "Country_selection",
-      "bind": {
-        "input": "select",
-        "options": [
-          null,
-          "United States",
-          "Russian Federation",
-          "Republic of Korea",
-          "Mexico",
-          "Germany",
-          "Brazil"
-        ],
-        "labels": [
-          "Show All",
-          "United States",
-          "Russian Federation",
-          "Republic of Korea",
-          "Mexico",
-          "Germany",
-          "Brazil"
-        ],
-        "name": "Country Selection: "
-      }
+      "aggregate": [{
+       "op": "sum",
+       "field": "suicides_no",
+       "as": "Total Suicide Cases"
+      }],
+      "groupby": ["year","age"]
     }
   ],
-    "transform": [
-      {
-        "aggregate": [{
-         "op": "sum",
-         "field": "suicides_no",
-         "as": "Total Suicide Cases"
-        }],
-        "groupby": ["year","age"]
-      },
-      {"filter": "Country_selection == null || datum.country == Country_selection"}
-    ],
-    "mark": {
-      "type":"line",
-    "point": true
-    },
-    "encoding": {
-      "x": {"field": "year", "title": "year"},
-      "y": { "field": "Total Suicide Cases", "type": "quantitative", "axis": {"grid": false, "ticks": false}},
-      "color": {"field": "age", "type": "nominal"},
-      "tooltip": [{"field": "year", "type": "quantitative"}, {"field": "Total Suicide Cases"}]
-    }
+  "mark": {
+    "type":"line",
+  "point": true
+  },
+  "encoding": {
+    "x": {"field": "year", "title": "year"},
+    "y": { "field": "Total Suicide Cases", "type": "quantitative", "axis": {"grid": false, "ticks": false}},
+    "color": {"field": "age", "type": "nominal",  "sort": ["5-14 years","15-24 years","25-34 years","35-54 years","55-74 years"]},
+    "tooltip": [{"field": "year", "type": "quantitative"}, {"field": "Total Suicide Cases"}]
   }
+}

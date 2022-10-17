@@ -1,8 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Worldwide Suicide Cases",
-  "width": 900,
-  "height": 400,
+  "width": "container",
+  "height": "container",
   "params": [
     {
       "name": "Year_above",
@@ -17,6 +16,9 @@
     }
   ],
   "projection": {"type": "equalEarth"},
+  "config":{
+    "background": "rgb(250, 245, 229)"
+  },
   "layer": [
     {
       "data": {
@@ -24,18 +26,30 @@
         "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
       },
       "transform": [
-        {
-          "calculate": "'No data in ' + datum.properties.NAME",
-          "as": "note"
+        { "calculate": "'No data in ' + datum.properties.NAME", "as": "information"
         }
       ],
       "mark": {
         "type": "geoshape",
          "fill": "#f1986f7e",
         "stroke": "white",
-        "strokeWidth": 1
+        "strokeWidth": 0.5
       },
-      "encoding": {"tooltip": {"field": "note"}}
+      "encoding": {"tooltip": {"field": "information"}}
+    },
+    {
+        "data": {
+          "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/7_others/oceans.topojson", 
+          "format": {"type": "topojson", "feature": "oceans"}
+        },
+        "mark": {"type": "geoshape", "fill": "#ceebface"}
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/kongpuifun/3179/main/ne_110m.json", 
+        "format": {"type": "topojson", "feature": "ne_110m_graticules_30"}
+      },
+      "mark": {"type": "geoshape", "fill": null, "stroke": "#5c5c5c59"}
     },
     {
       "data": {
